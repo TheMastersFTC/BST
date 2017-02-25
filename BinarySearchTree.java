@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
  * Created by chloe on 2/25/2017.
  */
 public class BinarySearchTree implements SortedSet{
+
+
     @Override
     public boolean add(Comparable item) {
         return false;
@@ -66,5 +68,66 @@ public class BinarySearchTree implements SortedSet{
     @Override
     public ArrayList toArrayList() {
         return null;
+    }
+
+    /**
+     * FIXME: comments
+     *
+     * Pictorially, a node is:
+     *
+     *       left data  right
+     *       ---------------
+     *     <--+   |  5  |  +--->
+     *       ---------------
+     *
+     *  Note, while a 5 is used above any "Type" could be contained in the node
+     */
+    public static class Node<Type>
+    {
+        //FIXME: create a data element of the Given Type
+        //FIXME: create a left and right reference to other nodes
+
+        //FIXME: write a constructor that simplifies building an initial node
+        public Node( Type the_data ){
+
+        }
+
+        /**
+         *
+         * This function must be written recursively.
+         *
+         * Height is defined as the 1 plus the maximum height of the left vs right sub tree
+         *
+         * @return the height from this node to its leaves
+         *
+         *
+         */
+        public int height(){
+            return 0;
+        }
+
+        /**
+         * recursive determine if the item is in this node or the nodes after
+         *
+         * @param item
+         *            - needle
+         * @return true if item in tree
+         */
+        public boolean contains( Type item ){
+            return true;
+        }
+
+        /**
+         * recursive - add a node
+         *
+         * @param item
+         *            - data to add
+         * @return
+         */
+        public void insert( Type item ){
+
+        }
+
+
     }
 }
