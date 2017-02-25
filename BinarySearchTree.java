@@ -7,7 +7,15 @@ import java.util.NoSuchElementException;
 /**
  * Created by chloe on 2/25/2017.
  */
-public class BinarySearchTree implements SortedSet{
+public class BinarySearchTree implements SortedSet {
+	
+	public Node root;
+	
+	public BinarySearchTree () {
+		
+		this.root = null;
+		
+	}
 
 
     @Override
@@ -69,7 +77,12 @@ public class BinarySearchTree implements SortedSet{
     public ArrayList toArrayList() {
         return null;
     }
-
+    
+    public void writeDot(String filename) {
+     
+        
+    }    
+        
     /**
      * FIXME: comments
      *
