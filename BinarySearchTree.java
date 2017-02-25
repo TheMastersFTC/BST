@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSet<Type>{
 
 
-    public Node root;
+    public Node<Type> root;
 
     public BinarySearchTree () {
 
@@ -91,14 +91,20 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
      *
      *  Note, while a 5 is used above any "Type" could be contained in the node
      */
-    protected static class Node<Type>
-    {
-        //FIXME: create a data element of the Given Type
-        //FIXME: create a left and right reference to other nodes
-
-        //FIXME: write a constructor that simplifies building an initial node
+    protected static class Node<Type> {
+    	
+    	protected Type data;
+    	
+    	protected Node<Type> left;
+    	protected Node<Type> right;
+    	
         public Node( Type the_data ){
 
+        	this.data = the_data;
+        	this.left = null;
+        	this.right = null;
+        	
+        	
         }
 
         /**
@@ -108,7 +114,6 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
          * Height is defined as the 1 plus the maximum height of the left vs right sub tree
          *
          * @return the height from this node to its leaves
-         *
          *
          */
         public int height(){
