@@ -112,7 +112,20 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
          *
          */
         public int height(){
-            return 0;
+            
+        	if(this.left == null || this.right == null)
+        		return 1;
+        	
+        	int leftDepth = this.left.height();
+        	int rightDepth = this.right.height();
+        	
+        	if(leftDepth > rightDepth)
+        		return leftDepth;
+        	
+        	else {
+        		return rightDepth;
+        	}
+        	
         }
 
         /**
