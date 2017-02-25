@@ -7,24 +7,24 @@ import java.util.NoSuchElementException;
 /**
  * Created by chloe on 2/25/2017.
  */
-public class BinarySearchTree implements SortedSet {
-	
-	public Node root;
-	
-	public BinarySearchTree () {
-		
-		this.root = null;
-		
-	}
+public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSet<Type>{
 
+
+    public Node root;
+
+    public BinarySearchTree () {
+
+        this.root = null;
+
+    }
 
     @Override
-    public boolean add(Comparable item) {
+    public boolean add(Type item) {
         return false;
     }
 
     @Override
-    public boolean addAll(Collection items) {
+    public boolean addAll(Collection<? extends Type> items) {
         return false;
     }
 
@@ -34,17 +34,17 @@ public class BinarySearchTree implements SortedSet {
     }
 
     @Override
-    public boolean contains(Comparable item) {
+    public boolean contains(Type item) {
         return false;
     }
 
     @Override
-    public boolean containsAll(Collection items) {
+    public boolean containsAll(Collection<? extends Type> items) {
         return false;
     }
 
     @Override
-    public Comparable first() throws NoSuchElementException {
+    public Type first() throws NoSuchElementException {
         return null;
     }
 
@@ -54,17 +54,17 @@ public class BinarySearchTree implements SortedSet {
     }
 
     @Override
-    public Comparable last() throws NoSuchElementException {
+    public Type last() throws NoSuchElementException {
         return null;
     }
 
     @Override
-    public boolean remove(Comparable item) {
+    public boolean remove(Type item) {
         return false;
     }
 
     @Override
-    public boolean removeAll(Collection items) {
+    public boolean removeAll(Collection<? extends Type> items) {
         return false;
     }
 
@@ -74,15 +74,11 @@ public class BinarySearchTree implements SortedSet {
     }
 
     @Override
-    public ArrayList toArrayList() {
+    public ArrayList<Type> toArrayList() {
         return null;
     }
-    
-    public void writeDot(String filename) {
-     
-        
-    }    
-        
+
+
     /**
      * FIXME: comments
      *
@@ -95,7 +91,7 @@ public class BinarySearchTree implements SortedSet {
      *
      *  Note, while a 5 is used above any "Type" could be contained in the node
      */
-    public static class Node<Type>
+    protected static class Node<Type>
     {
         //FIXME: create a data element of the Given Type
         //FIXME: create a left and right reference to other nodes
