@@ -26,6 +26,17 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     	
     	if(item == null)
     		throw new NullPointerException();
+    	
+    	//If the list is empty:
+    	if(root == null) {
+    		
+    		Node<Type> newNode = new Node<>(item);
+    		
+    		root = newNode;
+    		
+    		size++;
+    		
+    	}
         
     	if(root.contains(item))
     		return false;
@@ -238,7 +249,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
          * @return the height from this node to its leaves
          *
          */
-        public int height(){
+        public int height() {
             
         	if(this.left == null || this.right == null)
         		return 1;
@@ -269,7 +280,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
         	if(this.data == item)
         		return true;
         	
-        	if(this.data.compareTo(item) < 0) {
+        	if(this.data.compareTo(item) > 0) {
         		
         		if(this.left == null)
         			return false;
@@ -301,7 +312,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
         	Node<Type> newNode = new Node<>(item);
                 	
         	//To traverse through the left side:
-        	if(this.data.compareTo(item) < 0) {
+        	if(this.data.compareTo(item) > 0) {
         		
         		//If you have reached the end of the branch:
         		if(this.left == null) {
@@ -326,7 +337,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
         	}
         	
         	//To traverse through the right side:
-        	if(this.data.compareTo(item) > 0) {
+        	if(this.data.compareTo(item) < 0) {
         		
         		//If you have reached the end of the branch:
         		if(this.right == null) {
