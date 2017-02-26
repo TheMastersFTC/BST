@@ -13,6 +13,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     public Node<Type> root;
     public int size;
 
+    
     public BinarySearchTree () {
 
         this.root = null;
@@ -140,6 +141,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     	
     	size--;
         return false;
+        
     }
 
     @Override
@@ -157,6 +159,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     		return false;
     	
     	return true;
+    	
     }
 
     @Override
@@ -167,8 +170,33 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     }
 
     @Override
-    public ArrayList<Type> toArrayList() {
-        return null;
+    public ArrayList<Type> toArrayList() { 
+    	
+    	ArrayList<Type> list = new ArrayList<>();
+    	
+    	Node<Type> current = root;
+    	
+    	//Add the left side:
+    	while(current.left != null) {
+    		
+    		
+    		
+    	}
+    	
+    	list.add(root.data);
+    	
+    	current = root;
+    	
+    	while(current.right != null) {
+    		
+    		list.add(current.data);
+    		
+    		current = current.right; 
+    		
+    	}
+    	
+    	return list;
+    	
     }
 
 
@@ -191,7 +219,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     	protected Node<Type> left;
     	protected Node<Type> right;
     	
-        public Node( Type the_data ){
+        public Node( Type the_data ) {
 
         	this.data = the_data;
         	this.left = null;
@@ -268,6 +296,8 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
          * @return
          */
         public void insert( Type item ) {
+        	
+        	Node<Type> newNode = new Node<>(item);
                 	
         	//To traverse through the left side:
         	if(this.data.compareTo(item) < 0) {
@@ -275,15 +305,13 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
         		//If you have reached the end of the branch:
         		if(this.left == null) {
         			
-        			this.left = new Node<Type>(item);
+        			this.left = newNode;
         			return;
         			
         		}
         		
         		//If you find where the item belongs:
         		if(this.left.data.compareTo(item) < 0) {
-        			
-        			Node<Type> newNode = new Node<>(item);
         			
         			newNode.left = this.left;
         			newNode.right = this.right;
@@ -302,15 +330,13 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
         		//If you have reached the end of the branch:
         		if(this.right == null) {
         			
-        			this.right = new Node<Type>(item);
+        			this.right = newNode;
         			return;
         			
         		}
         		
         		//If you find where the item belongs:
         		if(this.right.data.compareTo(item) > 0) {
-        			
-        			Node<Type> newNode = new Node<>(item);
         			
         			newNode.left = this.left;
         			newNode.right = this.right;
