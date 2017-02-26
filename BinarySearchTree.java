@@ -17,6 +17,7 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     public BinarySearchTree () {
 
         this.root = null;
+        this.size = 0;
 
     }
 
