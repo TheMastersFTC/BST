@@ -141,7 +141,15 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
          * @return true if item in tree
          */
         public boolean contains( Type item ){
-            return true;
+            
+        	if(this.data == item)
+        		return true;
+        	
+        	if(this.data.compareTo(item) )
+        		return this.right.contains(item);
+        	
+        	
+        	
         }
 
         /**
