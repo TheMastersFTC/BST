@@ -52,19 +52,21 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
     @Override
     public boolean addAll(Collection<? extends Type> items) {
 
-        int beforeSize = size;
-
         for(Type current : items) {
-            if(root==null){
-                this.add(current);
-            }
-            else if(root.contains(current)==false) {
-                this.add(current);
-            }
+        	
+        	if(root == null)
+        		root = new Node<>(current);
+        	
+        	else if(root.contains(current))
+        		return false;
+        	
+        	else {
+        		
+        		root.insert(current);
+        	
+        	}
+            
         }
-
-        if(beforeSize == size)
-            return false;
 
         return true;
 
@@ -90,8 +92,14 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
 
     @Override
     public boolean containsAll(Collection<? extends Type> items) {
+    	
+    	if(items.isEmpty())
+    		throw new NoSuchElementException();
 
         for(Type current : items) {
+        	
+        	if(current==null)
+        		throw new NoSuchElementException();
 
             if(root.contains(current) == false)
                 return false;
@@ -150,9 +158,12 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
 
     @Override
     public boolean remove(Type item) {
-
+    	
+    	if(!root.contains(item))
+    		return false;
+    			
         size--;
-        return false;
+        return true;
 
     }
 
