@@ -11,7 +11,7 @@
  * 
  */
 
-package lists_2420;
+package cs2420;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
