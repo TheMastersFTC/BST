@@ -321,23 +321,17 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
                     return;
 
                 }
+                
+                else {
 
-                //If you find where the item belongs:
-                if(this.left.data.compareTo(item) < 0) {
-
-                    newNode.left = this.left;
-                    newNode.right = this.right;
-
-                    this.left = newNode;
-
+                	this.left.insert(item);
+                	
                 }
-
-                this.left.insert(item);
 
             }
 
             //To traverse through the right side:
-            if(this.data.compareTo(item) < 0) {
+            else if(this.data.compareTo(item) < 0) {
 
                 //If you have reached the end of the branch:
                 if(this.right == null) {
@@ -347,17 +341,11 @@ public class BinarySearchTree <Type extends Comparable<Type>>implements SortedSe
 
                 }
 
-                //If you find where the item belongs:
-                if(this.right.data.compareTo(item) > 0) {
-
-                    newNode.left = this.left;
-                    newNode.right = this.right;
-
-                    this.right = newNode;
-
+                else {
+                	
+                	this.right.insert(item);
+                
                 }
-
-                this.right.insert(item);
 
             }
 
