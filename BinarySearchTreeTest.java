@@ -80,8 +80,8 @@ public class BinarySearchTreeTest {
 
         list.add(3);
 
-        assertEquals(2, (int)list.root.left.left.data);
-        assertEquals(3, (int)list.root.left.data);
+        assertEquals(2, (int)list.root.left.data);
+        assertEquals(3, (int)list.root.left.right.data);
 
     }
 
