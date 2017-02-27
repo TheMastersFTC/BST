@@ -1,8 +1,8 @@
 package cs2420;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
+import java.util.*;
 
 public class BinarySearchTreeTest {
 
@@ -85,7 +85,23 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void testAddAll() {
-		fail("Not yet implemented");
+		
+		//Make the BST.
+		BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+		//Make the set we're adding.
+		Set<Integer> set = new HashSet<>();
+		
+		set.add(42);
+		set.add(13);
+		set.add(2);
+		
+		list.addAll(set);
+		
+		assertTrue(list.contains(42));
+		assertTrue(list.contains(13));
+		assertTrue(list.contains(2));
+		
 	}
 
 	@Test
@@ -123,7 +139,61 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void testContainsAll() {
-		fail("Not yet implemented");
+		
+		//Make the BST.
+		BinarySearchTree<Integer> list = new BinarySearchTree<>();
+		
+		list.add(42);
+		list.add(13);
+		list.add(2);
+
+		//Make the set we're checking for.
+		Set<Integer> set = new HashSet<>();
+		
+		set.add(42);
+		set.add(13);
+		set.add(2);
+	
+		assertTrue(list.containsAll(set));
+		
+	}
+	
+	@Test
+	public void testContainsAllFalse() {
+		
+		//Make the BST.
+		BinarySearchTree<Integer> list = new BinarySearchTree<>();
+		
+		list.add(42);
+		list.add(13);
+		list.add(2);
+
+		//Make the set we're checking for.
+		Set<Integer> set = new HashSet<>();
+		
+		set.add(42);
+		set.add(3);
+		set.add(2);
+	
+		assertFalse(list.containsAll(set));
+		
+	}
+	
+	@Test (expected = NoSuchElementException.class)
+	public void testContainsAllException() {
+		
+		//Make the BST.
+		BinarySearchTree<Integer> list = new BinarySearchTree<>();
+		
+		list.add(42);
+		list.add(13);
+		list.add(2);
+
+		//Make the set we're checking for.
+		Set<Integer> set = new HashSet<>();
+	
+		list.containsAll(set);
+		
 	}
 
 	@Test
@@ -218,3 +288,4 @@ public class BinarySearchTreeTest {
 	}
 
 }
+
