@@ -52,7 +52,9 @@ public class SpellChecker {
      *            - the String to be added to the dictionary
      */
     public void addToDictionary(String word) {
-        // FILL IN
+        
+    	dictionary.add(word);
+    	
     }
 
     /**
@@ -62,7 +64,9 @@ public class SpellChecker {
      *            - the String to be removed from the dictionary
      */
     public void removeFromDictionary(String word) {
-        // FILL IN
+    
+    	dictionary.remove(word);
+    
     }
 
     /**
@@ -76,10 +80,18 @@ public class SpellChecker {
     public List<String> spellCheck(File documentFile) {
 
         List<String> wordsToCheck = readFromFile(documentFile);
+        
+        List<String> misspelledWords = new ArrayList<>();
 
-        // FILL IN -- do not return null
+        for(String currentWord : wordsToCheck) {
+        	
+        	if(!dictionary.contains(currentWord))
+        		misspelledWords.add(currentWord);
+        	
+        }
 
-        return null;
+        return misspelledWords;
+        
     }
 
     /**
@@ -89,7 +101,13 @@ public class SpellChecker {
      *            - the List of Strings to be added to the dictionary
      */
     private void buildDictionary(List<String> words) {
-        // FILL IN
+        
+    	for(String current : words) {
+    		
+    		dictionary.add(current);
+    		
+    	}
+    	
     }
 
     /**
@@ -136,4 +154,3 @@ public class SpellChecker {
         return words;
     }
 }
-
