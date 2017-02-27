@@ -228,7 +228,7 @@ public class BinarySearchTreeTest {
     @Test
     public void testRemove() {
     	
-    	//Test
+    	//Testing 1 2 3
 
 
     }
