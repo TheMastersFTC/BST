@@ -1,7 +1,9 @@
 package cs2420;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
+
 import java.util.*;
 
 public class BinarySearchTreeTest {
@@ -225,15 +227,42 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testRemove() {
-    	
-    	//Testing 1 2 3
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
 
+        list.add(4);
+        list.add(3);
+        list.add(5);
+
+        list.remove(5);
+
+        //checks that the size is smaller
+        assertEquals(2,list.size());
+
+        //checks that it is no longer contained
+        assertEquals(false, list.contains(5));
 
     }
 
     @Test
     public void testRemoveAll() {
-        fail("Not yet implemented");
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        HashSet<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        set.add(4);
+        set.add(5);
+
+        list.addAll(set);
+
+        list.removeAll(set);
+
+        //checks that the size is smaller
+        assertEquals(0,list.size());
+
+        //checks that it is no longer contained
+        assertEquals(false, list.containsAll(set));
     }
 
     @Test
@@ -265,7 +294,18 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testToArrayList() {
-        fail("Not yet implemented");
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.add(5);
+
+        assertEquals(arrayList, list.toArrayList());
     }
 
 }
