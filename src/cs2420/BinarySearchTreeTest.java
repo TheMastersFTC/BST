@@ -109,12 +109,12 @@ public class BinarySearchTreeTest {
         assertEquals(false,list.contains(6));
 
     }
-    
+
     @Test
     public void testAddAllOneInvalid() {
-    	
+
         BinarySearchTree<Integer> list = new BinarySearchTree<>();
-        
+
         list.add(2);
 
         HashSet<Integer> set = new HashSet<>();
@@ -125,7 +125,7 @@ public class BinarySearchTreeTest {
         set.add(5);
 
         list.addAll(set);
-       
+
         //checks to make sure all values are contained
         assertEquals(true, list.contains(1));
         assertEquals(true, list.contains(2));
@@ -135,7 +135,7 @@ public class BinarySearchTreeTest {
 
         //checks for a non-contained value
         assertEquals(false,list.contains(6));
-        
+
         assertEquals(5, list.size());
 
     }
@@ -172,7 +172,7 @@ public class BinarySearchTreeTest {
         assertFalse(list.contains(14));
 
     }
-    
+
     @Test
     public void testContainsStrings() {
 
@@ -189,7 +189,7 @@ public class BinarySearchTreeTest {
         assertFalse(list.contains("zoo"));
 
     }
-    
+
     @Test
     public void testContainsLarge() {
 
@@ -204,7 +204,7 @@ public class BinarySearchTreeTest {
         list.add(4);
         list.add(654);
         list.add(91);
-        
+
         System.out.println(list.toArrayList());
 
         assertTrue(list.contains(0));
@@ -220,8 +220,8 @@ public class BinarySearchTreeTest {
         assertFalse(list.contains(14));
 
     }
-    
-    
+
+
     @Test
     public void testContainsOnEmpty() {
 
@@ -317,6 +317,7 @@ public class BinarySearchTreeTest {
     public void testRemove() {
         BinarySearchTree<Integer> list = new BinarySearchTree<>();
 
+        //tests case 1
         list.add(4);
         list.add(3);
         list.add(5);
@@ -329,6 +330,52 @@ public class BinarySearchTreeTest {
         //checks that it is no longer contained
         assertEquals(false, list.contains(5));
 
+        list.clear();
+        //test case 2
+        list.add(4);
+        list.add(3);
+        list.add(5);
+        list.add(7);
+
+        list.remove(5);
+
+        //checks that the size is smaller
+        assertEquals(3,list.size());
+
+        //checks that it is no longer contained
+        assertEquals(false, list.contains(5));
+
+        list.clear();
+        //test case 3
+        list.add(3);
+        list.add(2);
+        list.add(5);
+        list.add(7);
+        list.add(4);
+
+        list.remove(5);
+
+        //checks that the size is smaller
+        assertEquals(4,list.size());
+
+        //checks that it is no longer contained
+        assertEquals(false, list.contains(5));
+
+    }
+
+    @Test
+    public void testRemoveRoot() {
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        list.add(5);
+        list.add(2);
+
+        list.remove(5);
+
+        assertEquals(1,list.size());
+
+        //checks that it is no longer contained
+        assertEquals(false, list.contains(5));
     }
 
     @Test
@@ -395,7 +442,7 @@ public class BinarySearchTreeTest {
 
         assertEquals(arrayList, list.toArrayList());
     }
-    
+
     @Test
     public void testToArrayListOutOfOrder() {
         BinarySearchTree<Integer> list = new BinarySearchTree<>();
@@ -407,7 +454,7 @@ public class BinarySearchTreeTest {
         list.add(42);
 
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        
+
         arrayList.add(1);
         arrayList.add(3);
         arrayList.add(4);
@@ -416,7 +463,7 @@ public class BinarySearchTreeTest {
 
         assertEquals(arrayList, list.toArrayList());
     }
-    
+
     @Test
     public void testToArrayListEmpty() {
         BinarySearchTree<Integer> list = new BinarySearchTree<>();
@@ -426,6 +473,7 @@ public class BinarySearchTreeTest {
         assertEquals(arrayList, list.toArrayList());
     }
 
+    public void writeDot(String filename){
 
+    }
 }
-
