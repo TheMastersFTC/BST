@@ -109,6 +109,36 @@ public class BinarySearchTreeTest {
         assertEquals(false,list.contains(6));
 
     }
+    
+    @Test
+    public void testAddAllOneInvalid() {
+    	
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+        
+        list.add(2);
+
+        HashSet<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        set.add(4);
+        set.add(5);
+
+        list.addAll(set);
+
+        //checks to make sure all values are contained
+        assertEquals(true, list.contains(1));
+        assertEquals(true, list.contains(2));
+        assertEquals(true, list.contains(3));
+        assertEquals(true, list.contains(4));
+        assertEquals(true, list.contains(5));
+
+        //checks for a non-contained value
+        assertEquals(false,list.contains(6));
+        
+        assertEquals(5, list.size());
+
+    }
 
     @Test
     public void testClear() {
@@ -140,6 +170,15 @@ public class BinarySearchTreeTest {
         assertTrue(list.contains(2));
 
         assertFalse(list.contains(14));
+
+    }
+    
+    @Test
+    public void testContainsOnEmpty() {
+
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        assertFalse(list.contains(11));
 
     }
 
@@ -307,5 +346,37 @@ public class BinarySearchTreeTest {
 
         assertEquals(arrayList, list.toArrayList());
     }
+    
+    @Test
+    public void testToArrayListOutOfOrder() {
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(1);
+        list.add(42);
+
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        
+        arrayList.add(1);
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.add(5);
+        arrayList.add(42);
+
+        assertEquals(arrayList, list.toArrayList());
+    }
+    
+    @Test
+    public void testToArrayListEmpty() {
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
+        assertEquals(arrayList, list.toArrayList());
+    }
+
 
 }
+
