@@ -1,6 +1,5 @@
 package cs2420;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -66,15 +65,17 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
         for (Type current : items) {
 
-            if (root == null)
-                root = new Node<>(current);
+            if (root == null) {
+               
+            	root = new Node<>(current);
+            	size++;
+            	
+            }
 
-            else if (root.contains(current))
-                return false;
-
-            else {
+            else if (!root.contains(current)) {
 
                 root.insert(current);
+                size++;
 
             }
 
@@ -94,6 +95,9 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     @Override
     public boolean contains(Type item) {
+    	
+    	if(root==null)
+    		return false;
 
         if (item == null)
             throw new NullPointerException();
@@ -220,19 +224,16 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     @Override
     public ArrayList<Type> toArrayList() {
 
-        ArrayList list = new ArrayList();
+        ArrayList<Type> list = new ArrayList<>();
+        
+        if(root==null)
+        	return list;
 
         return toArrayListHelper(root, list);
+        
     }
 
-    public ArrayList<Type> toArrayListHelper(Node element, ArrayList list){
-
-//        if(element.left==null){
-//            list.add(element.data);
-//            return list;
-//        }
-//
-//        toArrayListHelper(element.left,list);
+    public ArrayList<Type> toArrayListHelper(Node<Type> element, ArrayList<Type> list){
 
         if(element.left!=null){
             toArrayListHelper(element.left,list);
@@ -299,12 +300,6 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 return rightDepth;
 
             }
-//            if(this.left==null){
-//                return right.height()+1;
-//            }else if(this.right==null){
-//                return left.height()+1;
-//            }
-//            return  Math.max(left.height(),right.height())+1;
 
         }
 
@@ -354,7 +349,6 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 if (this.left == null) {
 
                     this.left = newNode;
-                    return;
 
                 } else {
 
@@ -369,7 +363,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 if (this.right == null) {
 
                     this.right = newNode;
-                    return;
+                    
                 } else {
                     this.right.insert(item);
                 }
