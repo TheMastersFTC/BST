@@ -125,7 +125,7 @@ public class BinarySearchTreeTest {
         set.add(5);
 
         list.addAll(set);
-
+       
         //checks to make sure all values are contained
         assertEquals(true, list.contains(1));
         assertEquals(true, list.contains(2));
@@ -172,6 +172,55 @@ public class BinarySearchTreeTest {
         assertFalse(list.contains(14));
 
     }
+    
+    @Test
+    public void testContainsStrings() {
+
+        BinarySearchTree<String> list = new BinarySearchTree<>();
+
+        list.add("hello");
+        list.add("dude");
+        list.add("what");
+
+        assertTrue(list.contains("hello"));
+        assertTrue(list.contains("dude"));
+        assertTrue(list.contains("what"));
+
+        assertFalse(list.contains("zoo"));
+
+    }
+    
+    @Test
+    public void testContainsLarge() {
+
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(68);
+        list.add(92);
+        list.add(71);
+        list.add(4);
+        list.add(654);
+        list.add(91);
+        
+        System.out.println(list.toArrayList());
+
+        assertTrue(list.contains(0));
+        assertTrue(list.contains(1));
+        assertTrue(list.contains(2));
+        assertTrue(list.contains(68));
+        assertTrue(list.contains(92));
+        assertTrue(list.contains(71));
+        assertTrue(list.contains(4));
+        assertTrue(list.contains(654));
+        assertTrue(list.contains(91));
+
+        assertFalse(list.contains(14));
+
+    }
+    
     
     @Test
     public void testContainsOnEmpty() {
