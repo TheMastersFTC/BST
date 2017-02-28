@@ -7,49 +7,76 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represents a "dictionary" of strings using a binary search tree and offers
- * methods for spell-checking documents.
+ * This class represents a "dictionary" is a binary search tree
+ * and then checks files against this dictionary to find
+ * misspelled words.
+ * 
+ * It provides various constructors for creating the dictionary,
+ * and the user is able to specify the file they wish to
+ * spell check.
  *
- * @author
+ * @author Chloe Josien, Kylee Fluckiger, germain
+ * @date 2/27/2017
+ * 
  */
 public class SpellChecker {
+	
 
+	/**
+	 * This class stores the "dictionary" of approved words
+	 * as a BinarySearchTree of Strings.
+	 * 
+	 */
     private BinarySearchTree<String> dictionary;
 
+    
     /**
-     * Default constructor--creates empty dictionary.
+     * This default constructor simply creates a new
+     * dictionary BST.
+     * 
      */
     public SpellChecker() {
+    	
         dictionary = new BinarySearchTree<String>();
+        
     }
 
     /**
-     * Constructor--creates dictionary from a list of words.
+     * This overloaded constructor creates a dictionary out of
+     * the parameter List of Strings.
      *
      * @param words
      *            - the List of Strings used to build the dictionary
+     *            
      */
     public SpellChecker(List<String> words) {
+    	
         this();
         buildDictionary(words);
+        
     }
 
     /**
-     * Constructor--creates dictionary from a file.
+     * This overloaded constructor creates a new dictionary from
+     * a File.
      *
      * @param dictionaryFile
      *            - the File that contains Strings used to build the dictionary
+     *            
      */
     public SpellChecker(File dictionaryFile) {
+    	
         this();
         buildDictionary(readFromFile(dictionaryFile));
+        
     }
 
     /**
-     * Add a word to the dictionary.
+     * This function adds a single word to the dictionary.
      *
      * @param word
      *            - the String to be added to the dictionary
+     *            
      */
     public void addToDictionary(String word) {
         
@@ -58,10 +85,11 @@ public class SpellChecker {
     }
 
     /**
-     * Remove a word from the dictionary.
+     * This function removes a word from the dictionary.
      *
      * @param word
      *            - the String to be removed from the dictionary
+     *            
      */
     public void removeFromDictionary(String word) {
     
@@ -70,12 +98,13 @@ public class SpellChecker {
     }
 
     /**
-     * Spell-checks a document against the dictionary.
+     * This function spell checks a document against the dictionary.
      *
      * @param documentFile
      *            - the File that contains Strings to be looked up in the
      *            dictionary
      * @return a List of misspelled words
+     * 
      */
     public List<String> spellCheck(File documentFile) {
 
@@ -83,10 +112,15 @@ public class SpellChecker {
         
         List<String> misspelledWords = new ArrayList<>();
 
+        //Iterate through the words we need to check.
         for(String currentWord : wordsToCheck) {
-        	
-        	if(!dictionary.contains(currentWord))
+        	        	
+        	//If the word isn't in the dictionary, it is misspelled.
+        	if(!dictionary.contains(currentWord)) {
+        		
         		misspelledWords.add(currentWord);
+        		
+        	}
         	
         }
 
@@ -95,30 +129,29 @@ public class SpellChecker {
     }
 
     /**
-     * Fills in the dictionary with the input list of words.
+     * This function fills in the dictionary with the input list of words.
      *
      * @param words
      *            - the List of Strings to be added to the dictionary
+     *            
      */
     private void buildDictionary(List<String> words) {
         
-    	for(String current : words) {
-    		
-    		dictionary.add(current);
-    		
-    	}
+    	dictionary.addAll(words);
     	
     }
 
     /**
-     * Returns a list of the words contained in the specified file. (Note that
-     * symbols, digits, and spaces are ignored.)
+     * This function returns a list of the words contained in the specified file. 
+     * (Note that symbols, digits, and spaces are ignored.)
      *
      * @param file
      *            - the File to be read
      * @return a List of the Strings in the input file
+     * 
      */
     private List<String> readFromFile(File file) {
+    	
         ArrayList<String> words = new ArrayList<String>();
 
         try (Scanner fileInput = new Scanner(file)) {
@@ -152,5 +185,7 @@ public class SpellChecker {
         System.out.println("Document is " + words);
 
         return words;
+        
     }
+    
 }
