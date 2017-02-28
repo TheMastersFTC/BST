@@ -5,15 +5,19 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 
 /**
- * Created by chloe on 2/25/2017.
+ * @author chloe Josien, Kylee Fluckiger
+ * @date 2/27/2017
+ *
  */
 public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSet<Type> {
 
-
+    //fields
     public Node<Type> root;
     public int size;
 
-
+    /**
+     * constructs a BinarySearchTree
+     */
     public BinarySearchTree() {
 
         this.root = null;
@@ -21,6 +25,16 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * Adds an item to the tree if it is not already contained
+     *
+     * @param item
+     *          - the item whose presence is ensured in this set
+     * @return true if this set changed as a result of this method call (that is,
+     *         if the input item was actually inserted); otherwise, returns false
+     * @throws NullPointerException
+     *           if the item is null
+     */
     @Override
     public boolean add(Type item) {
 
@@ -50,7 +64,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     }
 
     /**
-     * Ensures that this set contains all items in the specified collection.
+     * adds all the values in the collection if not already contained
      *
      * @param items
      *          - the collection of items whose presence is ensured in this set
@@ -66,10 +80,10 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         for (Type current : items) {
 
             if (root == null) {
-               
-            	root = new Node<>(current);
-            	size++;
-            	
+
+                root = new Node<>(current);
+                size++;
+
             }
 
             else if (!root.contains(current)) {
@@ -85,6 +99,9 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * clears the tree
+     */
     @Override
     public void clear() {
 
@@ -93,11 +110,21 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * checks if the given item is contained in the tree
+     *
+     * @param item
+     *          - the item sought in this set
+     * @return true if there is an item in this set that is equal to the input
+     *         item; otherwise, returns false
+     * @throws NullPointerException
+     *           if the item is null
+     */
     @Override
     public boolean contains(Type item) {
-    	
-    	if(root==null)
-    		return false;
+
+        if(root==null)
+            return false;
 
         if(item == null)
             throw new NullPointerException();
@@ -106,6 +133,16 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * checks to see if each item in the collection is contained in the tree
+     *
+     * @param items
+     *          - the collection of items sought in this set
+     * @return true if for each item in the specified collection, there is an item
+     *         in this set that is equal to it; otherwise, returns false
+     * @throws NullPointerException
+     *           if any of the items is null
+     */
     @Override
     public boolean containsAll(Collection<? extends Type> items) {
 
@@ -126,6 +163,13 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * Finds the first/ smallest element in the tree
+     * 
+     * @return the smallest element in the tree
+     * 
+     * @throws NoSuchElementException if the item doesn't exist
+     */
     @Override
     public Type first() throws NoSuchElementException {
 
@@ -144,6 +188,11 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * checks if the tree is empty
+     * 
+     * @return true if the tree is empty else returns false
+     */
     @Override
     public boolean isEmpty() {
 
@@ -154,6 +203,13 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * Finds the last/biggest element in the tree
+     *
+     * @return the biggest element in the tree
+     *
+     * @throws NoSuchElementException if the item doesn't exist
+     */
     @Override
     public Type last() throws NoSuchElementException {
 
@@ -168,32 +224,22 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         return current.data;
     }
 
-    /**
-     * Ensures that this set does not contain the specified item.
-     *
-     * @param item
-     *          - the item whose absence is ensured in this set
-     * @return true if this set changed as a result of this method call (that is,
-     *         if the input item was actually removed); otherwise, returns false
-     * @throws NullPointerException
-     *           if the item is null
-     */
+    // FIXME: Write comment for this when written
     @Override
     public boolean remove(Type item) {
-    	
-    	if(root==null)
-    		return false;
+
+        if(root==null)
+            return false;
 
         if (root.contains(item)==false)
             return false;
-        
-        
         
         size--;
         return true;
 
     }
 
+    //FIXME: Write comment for this when written
     @Override
     public boolean removeAll(Collection<? extends Type> items) {
 
@@ -230,14 +276,21 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     public ArrayList<Type> toArrayList() {
 
         ArrayList<Type> list = new ArrayList<>();
-        
+
         if(root==null)
-        	return list;
+            return list;
 
         return toArrayListHelper(root, list);
-        
+
     }
 
+    /**
+     * recursively traverses the tree to add item to the arrayList in sorted order
+     * 
+     * @param element - the node you want to start from
+     * @param list - the list to add values too
+     * @return a sorted ArrayList
+     */
     public ArrayList<Type> toArrayListHelper(Node<Type> element, ArrayList<Type> list){
 
         if(element.left!=null){
@@ -256,15 +309,8 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
 
     /**
-     * <p>
-     * Pictorially, a node is:
-     * <p>
-     * left data  right
-     * ---------------
-     * <--+   |  5  |  +--->
-     * ---------------
-     * <p>
-     * Note, while a 5 is used above any "Type" could be contained in the node
+     * builds a node with certain properties
+     * 
      */
     protected static class Node<Type extends Comparable<Type>> {
 
@@ -328,7 +374,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 return this.right.contains(item);
 
             }
-            
+
             return false;
 
         }
@@ -364,7 +410,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 if (this.right == null) {
 
                     this.right = newNode;
-                    
+
                 } else {
                     this.right.insert(item);
                 }
