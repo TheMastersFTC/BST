@@ -99,7 +99,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     	if(root==null)
     		return false;
 
-        if (item == null)
+        if(item == null)
             throw new NullPointerException();
 
         return root.contains(item);
@@ -180,10 +180,15 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
      */
     @Override
     public boolean remove(Type item) {
+    	
+    	if(root==null)
+    		return false;
 
-        if (root.contains(item)==false) {
+        if (root.contains(item)==false)
             return false;
-        }
+        
+        
+        
         size--;
         return true;
 
@@ -311,24 +316,20 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
          */
         public boolean contains(Type item) {
 
-            if (this.data == item)
+            if (this.data.equals(item))
                 return true;
 
-            if (this.data.compareTo(item) > 0) {
-
-                if (this.left == null)
-                    return false;
+            if (this.data.compareTo(item) > 0 && this.left != null) {
 
                 return this.left.contains(item);
 
-            } else {
-
-                if (this.right == null)
-                    return false;
+            } else if (this.data.compareTo(item) < 0 && this.right != null){
 
                 return this.right.contains(item);
 
             }
+            
+            return false;
 
         }
 
