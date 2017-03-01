@@ -32,8 +32,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
      * This field stores the number of the elements
      * in the BST.
      */
-    public int size;
-
+    private int size;
 
     /**
      * This constructor creates a BST of size 0 and sets
@@ -43,7 +42,6 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
         this.root = null;
         this.size = 0;
-
     }
 
     /**
@@ -66,21 +64,17 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
             Node<Type> newNode = new Node<>(item);
 
             root = newNode;
-
             size++;
-
         }
 
         //Do not add if the item is already in the BST.
-        if (root.contains(item))
+        if (root.contains(item)) {
             return false;
+        }
 
         root.insert(item);
-
         size++;
-
         return true;
-
     }
 
     /**
@@ -103,29 +97,23 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         //Iterate through the collection.
         for (Type current : items) {
 
-            if (current == null)
+            if (current == null) {
                 throw new NullPointerException();
+            }
 
             //If this is the first element, make it the root.
             if (root == null) {
-
                 root = new Node<>(current);
                 size++;
-
             }
 
             //Add the element only if it is not already contained in the set.
             else if (!root.contains(current)) {
-
                 root.insert(current);
                 size++;
-
             }
-
         }
-
         return true;
-
     }
 
     /**
@@ -134,10 +122,8 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
      */
     @Override
     public void clear() {
-
         root = null;
         size = 0;
-
     }
 
     /**
@@ -152,14 +138,14 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     public boolean contains(Type item) {
 
         //If the BST is empty, it does not contain the item.
-        if (root == null)
+        if (root == null) {
             return false;
+        }
 
-        if (item == null)
+        if (item == null) {
             throw new NullPointerException();
-
+        }
         return root.contains(item);
-
     }
 
     /**
@@ -179,16 +165,15 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         //Iterate through the collection.
         for (Type current : items) {
 
-            if (current == null)
+            if (current == null) {
                 throw new NoSuchElementException();
+            }
 
-            if (!root.contains(current))
+            if (!root.contains(current)) {
                 return false;
-
+            }
         }
-
         return true;
-
     }
 
     /**
@@ -200,19 +185,17 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     @Override
     public Type first() throws NoSuchElementException {
 
-        if (root == null)
+        if (root == null){
             throw new NoSuchElementException();
+        }
 
         Node<Type> current = root;
 
-        while (current.left != null) {
+        while (current.left != null){
 
             current = current.left;
-
         }
-
         return current.data;
-
     }
 
     /**
@@ -223,11 +206,10 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     @Override
     public boolean isEmpty() {
 
-        if (root == null)
+        if (root == null) {
             return true;
-
+        }
         return false;
-
     }
 
     /**
@@ -240,8 +222,9 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     public Type last() throws NoSuchElementException {
 
         //If the BST is empty, there is no "last" value.
-        if (root == null)
+        if (root == null) {
             throw new NoSuchElementException();
+        }
 
         Node<Type> current = root;
 
@@ -249,44 +232,59 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         while (current.right != null) {
             current = current.right;
         }
-
         return current.data;
-
     }
 
-    // FIXME: Write comment for this when written
+    /**
+     * Removes the given item from the tree.
+     *
+     * @param item
+     *          - the item whose absence is ensured in this set
+     * @return true if this set changed as a result of this method call (that is,
+     *         if the input item was actually removed); otherwise, returns false
+     * @throws NullPointerException
+     *           if the item is null
+     */
     @Override
     public boolean remove(Type item) {
 
-        if (root == null)
+        if (root == null) {
             return false;
+        }
 
-        if (root.contains(item) == false)
+        if (root.contains(item) == false) {
             return false;
+        }
 
-        if(root.data == item)  {
+        //if we're removing the root
+        if (root.data == item) {
 
             Node<Type> dummy = new Node<Type>(null);
 
             dummy.left = root;
-
             dummy.left.delete(item, dummy, true);
-
             root = dummy.left;
         }
 
-        if(root.data.compareTo(item)>0) {
+        if (root.data.compareTo(item) > 0) {
             root.delete(item, root, true);
-        }else {
-            root.delete(item,root,false);
+        } else {
+            root.delete(item, root, false);
         }
         size--;
         return true;
-
     }
 
     /**
-     * FIXME: Write comment.
+     * removes all items in a given set.
+     *
+     * @param items
+     *          - the collection of items whose absence is ensured in this set
+     * @return true if this set changed as a result of this method call (that is,
+     *         if any item in the input collection was actually removed);
+     *         otherwise, returns false
+     * @throws NullPointerException
+     *           if any of the items is null
      */
     @Override
     public boolean removeAll(Collection<? extends Type> items) {
@@ -294,16 +292,13 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         int beforeSize = size;
 
         for (Type current : items) {
-
             remove(current);
-
         }
 
-        if (beforeSize == size)
+        if (beforeSize == size) {
             return false;
-
+        }
         return true;
-
     }
 
     /**
@@ -313,9 +308,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     /**
@@ -334,7 +327,6 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
         //Call the recursive helper function.
         return toArrayListHelper(root, list);
-
     }
 
     /**
@@ -361,11 +353,11 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
-    public void writeDot(String filename){
+    public void writeDot(String filename) {
 
-        FileWriter file =null;
+        FileWriter file = null;
 
-        try{
+        try {
             file = new FileWriter(filename);
             file.append("digraph {\n");
 
@@ -373,15 +365,14 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
             file.append("}");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             //close the file
             try {
                 file.flush();
                 file.close();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
 
             }
         }
@@ -390,44 +381,35 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     public void dotWriterHelper(FileWriter file, Node element) {
 
         try {
-
-            if(element.left!=null)
+            if (element.left != null) {
                 file.append(element.data + " -> ");
-
-            if(element.left!=null) {
-
-                file.append(element.left.data + ";\n");
-
             }
 
-            if(element.right!=null)
+            if (element.left != null) {
+                file.append(element.left.data + ";\n");
+            }
+
+            if (element.right != null) {
                 file.append(element.data + " -> ");
+            }
 
             //For the right side.
-            if(element.right!=null) {
-
+            if (element.right != null) {
                 file.append(element.right.data + ";\n");
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(element.left != null) {
-
+        if (element.left != null) {
             dotWriterHelper(file, element.left);
-
         }
 
-        if(element.right!=null) {
-
+        if (element.right != null) {
             dotWriterHelper(file, element.right);
-
         }
-
     }
-
 
     /**
      * This generic inner Node class provides the discrete functionality
@@ -478,7 +460,6 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
             this.left = null;
             this.right = null;
 
-
         }
 
         /**
@@ -491,8 +472,9 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         public int height() {
 
             //If we reach the end of a branch, return.
-            if (this.left == null || this.right == null)
+            if (this.left == null || this.right == null) {
                 return 1;
+            }
 
             //Calculate the height of the left branch.
             int leftDepth = this.left.height();
@@ -501,15 +483,12 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
             int rightDepth = this.right.height();
 
             //Return the maximum of the two heights.
-            if (leftDepth > rightDepth)
+            if (leftDepth > rightDepth) {
                 return leftDepth;
-
-            else {
-
-                return rightDepth;
-
             }
-
+            else {
+                return rightDepth;
+            }
         }
 
         /**
@@ -521,26 +500,20 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
          */
         public boolean contains(Type item) {
 
-            if (this.data.equals(item))
+            if (this.data.equals(item)) {
                 return true;
-
+            }
             //If the value to find is less than the current value, go left.
             if (this.data.compareTo(item) > 0 && this.left != null) {
-
                 return this.left.contains(item);
-
             }
 
             //Otherwise, go right, as long as right isn't null.
             else if (this.data.compareTo(item) < 0 && this.right != null) {
-
                 return this.right.contains(item);
-
             }
-
             //If you've completed all of the recursion and not returned true, return false.
             return false;
-
         }
 
         /**
@@ -558,11 +531,8 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
                 //If you have reached the end of the branch:
                 if (this.left == null) {
-
                     this.left = newNode;
-
                 } else {
-
                     this.left.insert(item);
                 }
             }
@@ -572,17 +542,22 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
                 //If you have reached the end of the branch:
                 if (this.right == null) {
-
                     this.right = newNode;
-
                 } else {
-
                     this.right.insert(item);
-
                 }
             }
         }
 
+        /**
+         * traverses the tree to find what value to delete and
+         * reorients the tree
+         *
+         * @param item - the item to delete
+         * @param parent - the previous node
+         * @param leftFlag - true if going left
+         * @return - a boolean value
+         */
         public boolean delete(Type item, Node parent, boolean leftFlag) {
 
             if (this.data.compareTo(item) > 0) {
@@ -619,20 +594,18 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                 }
 
                 //case 3: two children
-                else{
+                else {
                     Node current = this.left;
-                    while(current.right!=null){
+                    while (current.right != null) {
                         current = current.right;
                     }
                     Node target = current;
 
                     this.data = (Type) target.data;
-                    this.right.delete((Type) target.data,this,false);
+                    this.right.delete((Type) target.data, this, false);
                 }
             }
             return false;
         }
-
     }
-
 }
