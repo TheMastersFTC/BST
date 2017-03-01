@@ -1,5 +1,8 @@
 package cs2420;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -355,6 +358,73 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         }
 
         return list;
+
+    }
+
+    public void writeDot(String filename){
+
+        FileWriter file =null;
+
+        try{
+            file = new FileWriter(filename);
+            file.append("digraph {\n");
+
+            dotWriterHelper(file, root);
+
+            file.append("}");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        } finally{
+            //close the file
+            try {
+                file.flush();
+                file.close();
+            }
+            catch (IOException e){
+
+            }
+        }
+    }
+
+    public void dotWriterHelper(FileWriter file, Node element) {
+
+        try {
+
+            if(element.left!=null)
+                file.append(element.data + " -> ");
+
+            if(element.left!=null) {
+
+                file.append(element.left.data + ";\n");
+
+            }
+
+            if(element.right!=null)
+                file.append(element.data + " -> ");
+
+            //For the right side.
+            if(element.right!=null) {
+
+                file.append(element.right.data + ";\n");
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(element.left != null) {
+
+            dotWriterHelper(file, element.left);
+
+        }
+
+        if(element.right!=null) {
+
+            dotWriterHelper(file, element.right);
+
+        }
 
     }
 
