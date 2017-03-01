@@ -473,7 +473,20 @@ public class BinarySearchTreeTest {
         assertEquals(arrayList, list.toArrayList());
     }
 
-    public void writeDot(String filename){
+    @Test
+    public void dotFile() {
+
+        BinarySearchTree<Integer> list = new BinarySearchTree<>();
+
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(1);
+        list.add(42);
+        list.add(0);
+        list.add(2);
+
+        list.writeDot("dotFile.gv");
 
     }
 }
