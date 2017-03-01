@@ -32,7 +32,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
      * This field stores the number of the elements
      * in the BST.
      */
-    private int size;
+    public int size;
 
     /**
      * This constructor creates a BST of size 0 and sets
@@ -250,6 +250,10 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
         if (root == null) {
             return false;
+        }
+        
+        if(item == null) {
+            throw new NullPointerException();
         }
 
         if (root.contains(item) == false) {
