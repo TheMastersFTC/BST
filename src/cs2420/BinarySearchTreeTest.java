@@ -1,9 +1,7 @@
 package cs2420;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import java.util.*;
 
 public class BinarySearchTreeTest {
