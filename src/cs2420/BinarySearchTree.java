@@ -1,6 +1,5 @@
 package cs2420;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.NoSuchElementException;
  * It provides functionality as a basic, unbalanced binary search tree ADT.
  * The generic inner Node class provides the structure for the discrete nodes
  * within the binary search tree.
- * <p>
+ * 
  * Functionality includes add(), contains(), clear(), and toArrayList(),
  * with additional functionality for these functions in regards to
  * collections.
@@ -80,10 +79,10 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     /**
      * This function adds all the values in the collection that are not already
      * contained in the BST.
-     * <p>
+     * 
      * NOTE: All elements in the set that are not already contained in the BST WILL
      * be added; elements that are already present in the set will NOT
-     * be added.
+     * be added. The function does NOT return if an already present value is encountered.
      *
      * @param items - the collection of items whose presence is ensured in this set
      * @return true if this set changed as a result of this method call (that is,
@@ -357,6 +356,14 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
 
     }
 
+    /**
+     * This function writes data to a file such that it can be
+     * opened with Graphviz and show the binary search tree
+     * represented by a diagram (so long as the filename specifies
+     * a .gv or a .dot file).
+     * 
+     * @param filename, the String name of the file to be written to
+     */
     public void writeDot(String filename) {
 
         FileWriter file = null;
@@ -365,6 +372,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
             file = new FileWriter(filename);
             file.append("digraph {\n");
 
+            //Call the recursive helper function to fill in the data.
             dotWriterHelper(file, root);
 
             file.append("}");
@@ -372,7 +380,8 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //close the file
+        	
+            //Close the file
             try {
                 file.flush();
                 file.close();
@@ -382,23 +391,31 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
         }
     }
 
-    public void dotWriterHelper(FileWriter file, Node element) {
+    /**
+     * This is the recursive helper function for the dotWriter function.
+     * It recursively traverses the array, top to bottom, left to right,
+     * and stores the .gv representation of each parent and its children in
+     * the following format:
+     * 
+     * 		parent -> leftChild; (if leftChild exists)
+     * 		parent -> rightChild; (if rightChild exists)
+     * 
+     * @param file, the FileWriter that is storing our data in a file
+     * @param element, the current Node we are recording
+     */
+    public void dotWriterHelper(FileWriter file, Node<Type> element) {
 
         try {
+        	
+        	//Print a pointer line for the left child if applicable.
             if (element.left != null) {
                 file.append(element.data + " -> ");
-            }
-
-            if (element.left != null) {
                 file.append(element.left.data + ";\n");
             }
 
+            //Print a pointer line for the right child if applicable.
             if (element.right != null) {
                 file.append(element.data + " -> ");
-            }
-
-            //For the right side.
-            if (element.right != null) {
                 file.append(element.right.data + ";\n");
             }
 
@@ -406,10 +423,12 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
             e.printStackTrace();
         }
 
+        //Recurse down the left branch, if not at the end.
         if (element.left != null) {
             dotWriterHelper(file, element.left);
         }
 
+        //Recurse down the right branch, if not at the end.
         if (element.right != null) {
             dotWriterHelper(file, element.right);
         }
@@ -418,11 +437,11 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
     /**
      * This generic inner Node class provides the discrete functionality
      * for components of the binary search tree.
-     * <p>
+     * 
      * It holds a Type value and two references to a "left" and "right" Node,
      * whereby the left Node holds a value less than the current value and the
      * right Node holds a value greater than the current value.
-     * <p>
+     * 
      * This class provides some recursive functionality that allows for the
      * calculation of the BST height, and it also allows for the insertion
      * and searching of Nodes.
@@ -562,21 +581,34 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
          * @param leftFlag - true if going left
          * @return - a boolean value
          */
-        public boolean delete(Type item, Node parent, boolean leftFlag) {
+        public boolean delete(Type item, Node<Type> parent, boolean leftFlag) {
 
+        	//Traverse to the desired Node (if present).
+        	
+        	//Go to the left if item is less than current value.
             if (this.data.compareTo(item) > 0) {
                 if (this.left == null) {
                     return false;
                 }
+                
+                //Recursive call to continue traversal.
                 this.left.delete(item, this, true);
+                  
+            //Go to the right if item is more than current value.
             } else if (this.data.compareTo(item) < 0) {
                 if (this.right == null) {
                     return false;
                 }
+                
+                //Recursive call to continue traversal.
                 this.right.delete(item, this, false);
-            } else {
+                
+            } 
+            
+            //Once to the specified Node, begin removal process.
+            else {
 
-                //case 1 no children
+                //Case 1: Node to be deleted has no children.
                 if (this.left == null && this.right == null) {
                     if (leftFlag) {
                         parent.left = null;
@@ -587,7 +619,7 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                     }
                 }
 
-                // case 2: only one child
+                //Case 2: Node to be deleted has 1 child.
                 else if (this.left == null || this.right == null) {
 
                     if (this.left != null) {
@@ -597,18 +629,19 @@ public class BinarySearchTree<Type extends Comparable<Type>> implements SortedSe
                     }
                 }
 
-                //case 3: two children
+                //Case 3: Node to be deleted has 2 children.
                 else {
-                    Node current = this.left;
+                    Node<Type> current = this.left;
                     while (current.right != null) {
                         current = current.right;
                     }
-                    Node target = current;
+                    Node<Type> target = current;
 
                     this.data = (Type) target.data;
                     this.right.delete((Type) target.data, this, false);
                 }
             }
+            
             return false;
         }
     }
