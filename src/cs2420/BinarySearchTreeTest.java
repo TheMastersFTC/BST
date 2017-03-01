@@ -202,9 +202,7 @@ public class BinarySearchTreeTest {
         list.add(4);
         list.add(654);
         list.add(91);
-
-        System.out.println(list.toArrayList());
-
+        
         assertTrue(list.contains(0));
         assertTrue(list.contains(1));
         assertTrue(list.contains(2));
